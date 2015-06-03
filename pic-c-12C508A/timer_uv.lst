@@ -1,0 +1,598 @@
+CCS PCB C Compiler, Version 4.074, 38112               03-jun-15 14:43
+
+               Filename: timer_uv.lst
+
+               ROM used: 488 words (95%)
+                         Largest free fragment is 24
+               RAM used: 13 (52%) at main() level
+                         18 (72%) worst case
+               Stack:    1 locations
+
+*
+0000:  MOVWF  05
+0001:  GOTO   0E7
+0002:  GOTO   008
+0003:  GOTO   05B
+0004:  GOTO   073
+0005:  GOTO   098
+0006:  GOTO   0AD
+0007:  GOTO   0D2
+.................... //#include "C:\Users\r5527821\Dropbox\pic\projpic\time_uv\timer_uv.h" 
+.................... #include "timer_uv.h" 
+.................... //#include <16f628a.h> 
+.................... #include <12C508A.h> 
+.................... //////// Standard Header file for the PIC12C508A device //////////////// 
+.................... #device PIC12C508A 
+.................... #list 
+....................  
+....................  
+.................... #FUSES NOWDT                    //No Watch Dog Timer 
+.................... #FUSES INTRC                    //Internal RC Osc 
+.................... #FUSES NOPROTECT                //Code not protected from reading 
+.................... #FUSES NOMCLR                   //Master Clear pin used for I/O 
+....................  
+.................... #use delay(clock=4000000) 
+*
+005F:  MOVF   14,W
+0060:  BTFSC  03.2
+0061:  GOTO   070
+0062:  MOVLW  01
+0063:  MOVWF  08
+0064:  CLRF   07
+0065:  DECFSZ 07,F
+0066:  GOTO   065
+0067:  DECFSZ 08,F
+0068:  GOTO   064
+0069:  MOVLW  4A
+006A:  MOVWF  07
+006B:  DECFSZ 07,F
+006C:  GOTO   06B
+006D:  GOTO   06E
+006E:  DECFSZ 14,F
+006F:  GOTO   062
+.................... //#use rs232(baud=9600,parity=N,xmit=PIN_B0,bits=8) 
+....................  
+....................  
+.................... #use fast_io(b) 
+....................  
+....................  void pulso_clock() 
+....................    { 
+....................       output_high(pin_b0); //  
+*
+0053:  BSF    06.0
+....................       output_low(pin_b0); 
+0054:  BCF    06.0
+....................       //SHCP Low 
+....................        
+....................    } 
+....................   
+....................    void contar(unsigned int8 numero) 
+....................    { 
+....................     
+....................    int8 databits; 
+....................     switch(numero){ 
+*
+0008:  MOVF   15,W
+0009:  XORLW  00
+000A:  BTFSC  03.2
+000B:  GOTO   028
+000C:  XORLW  01
+000D:  BTFSC  03.2
+000E:  GOTO   02B
+000F:  XORLW  03
+0010:  BTFSC  03.2
+0011:  GOTO   02E
+0012:  XORLW  01
+0013:  BTFSC  03.2
+0014:  GOTO   031
+0015:  XORLW  07
+0016:  BTFSC  03.2
+0017:  GOTO   034
+0018:  XORLW  01
+0019:  BTFSC  03.2
+001A:  GOTO   037
+001B:  XORLW  03
+001C:  BTFSC  03.2
+001D:  GOTO   03A
+001E:  XORLW  01
+001F:  BTFSC  03.2
+0020:  GOTO   03D
+0021:  XORLW  0F
+0022:  BTFSC  03.2
+0023:  GOTO   040
+0024:  XORLW  01
+0025:  BTFSC  03.2
+0026:  GOTO   043
+0027:  GOTO   046
+....................       case 0:numero=0xc0;      break; 
+0028:  MOVLW  C0
+0029:  MOVWF  15
+002A:  GOTO   046
+....................       case 1:numero= 0xF9;      break; 
+002B:  MOVLW  F9
+002C:  MOVWF  15
+002D:  GOTO   046
+....................       case 2:numero= 0xA4;      break; 
+002E:  MOVLW  A4
+002F:  MOVWF  15
+0030:  GOTO   046
+....................       case 3:numero= 0xB0;      break; 
+0031:  MOVLW  B0
+0032:  MOVWF  15
+0033:  GOTO   046
+....................       case 4:numero= 0x99;      break; 
+0034:  MOVLW  99
+0035:  MOVWF  15
+0036:  GOTO   046
+....................       case 5:numero= 0x92;      break; 
+0037:  MOVLW  92
+0038:  MOVWF  15
+0039:  GOTO   046
+....................       case 6:numero= 0x82;      break; 
+003A:  MOVLW  82
+003B:  MOVWF  15
+003C:  GOTO   046
+....................       case 7:numero= 0xF8;      break; 
+003D:  MOVLW  F8
+003E:  MOVWF  15
+003F:  GOTO   046
+....................       case 8:numero= 0x80;      break; 
+0040:  MOVLW  80
+0041:  MOVWF  15
+0042:  GOTO   046
+....................       case 9:numero= 0x90;      break; 
+0043:  MOVLW  90
+0044:  MOVWF  15
+0045:  GOTO   046
+....................     } 
+....................      
+....................       //case 'L':return 0xc7;      break; 
+....................       //case 'A':return 0x88;      break; 
+....................       //case 'P':return 0x8c;      break; 
+....................       //case 'C':return 0xc6;      break; 
+....................       //case 'E':return 0x86;      break; 
+....................       //case 'F':return 0x86;      break; 
+....................       //case 'b':return 0x83;      break; 
+....................       //case 'u':return 0xC1;      break; 
+....................       //case '-':return 0xbf;      break; 
+....................     
+....................     
+....................     
+....................     
+....................       output_low(pin_b1); // Set latch 
+0046:  BCF    06.1
+....................       for(databits=0; databits<8; databits++){ 
+0047:  CLRF   16
+0048:  MOVLW  07
+0049:  MOVWF  07
+004A:  MOVF   16,W
+004B:  SUBWF  07,W
+004C:  BTFSS  03.0
+004D:  GOTO   059
+....................          if(numero & 0b10000000){ 
+004E:  BTFSS  15.7
+004F:  GOTO   052
+....................             output_high(pin_b4); // Set data 
+0050:  BSF    06.4
+....................          }else{ 
+0051:  GOTO   053
+....................             output_low(pin_b4); 
+0052:  BCF    06.4
+....................          } 
+....................          pulso_clock(); 
+....................          numero <<= 1; 
+*
+0055:  BCF    03.0
+0056:  RLF    15,F
+....................       } 
+0057:  INCF   16,F
+0058:  GOTO   048
+....................       output_high(pin_b1); // Set latch 
+0059:  BSF    06.1
+....................    } 
+005A:  RETLW  00
+....................   
+.................... void time(){ 
+....................    delay_ms(502); 
+005B:  MOVLW  02
+005C:  MOVWF  13
+005D:  MOVLW  FB
+005E:  MOVWF  14
+*
+0070:  DECFSZ 13,F
+0071:  GOTO   05D
+.................... } 
+0072:  RETLW  00
+....................  
+.................... void ola(){ 
+....................    contar(247);  
+*
+00EB:  MOVLW  F7
+00EC:  MOVWF  15
+00ED:  CALL   008
+....................    contar(247);  
+00EE:  MOVLW  F7
+00EF:  MOVWF  15
+00F0:  CALL   008
+....................    contar(247); 
+00F1:  MOVLW  F7
+00F2:  MOVWF  15
+00F3:  CALL   008
+....................    time();   
+00F4:  CALL   05B
+....................    contar(191); 
+00F5:  MOVLW  BF
+00F6:  MOVWF  15
+00F7:  CALL   008
+....................    contar(191); 
+00F8:  MOVLW  BF
+00F9:  MOVWF  15
+00FA:  CALL   008
+....................    contar(191); 
+00FB:  MOVLW  BF
+00FC:  MOVWF  15
+00FD:  CALL   008
+....................    time(); 
+00FE:  CALL   05B
+....................    contar(254);  
+00FF:  MOVLW  FE
+0100:  MOVWF  15
+0101:  CALL   008
+....................    contar(0b11111110); 
+0102:  MOVLW  FE
+0103:  MOVWF  15
+0104:  CALL   008
+....................    contar(254);   
+0105:  MOVLW  FE
+0106:  MOVWF  15
+0107:  CALL   008
+....................    time(); 
+0108:  CALL   05B
+....................    contar(0b10001000); //a 
+0109:  MOVLW  88
+010A:  MOVWF  15
+010B:  CALL   008
+....................    contar(0b11000111);//l 
+010C:  MOVLW  C7
+010D:  MOVWF  15
+010E:  CALL   008
+....................    contar(0xc0);     //o 
+010F:  MOVLW  C0
+0110:  MOVWF  15
+0111:  CALL   008
+.................... } 
+....................  
+.................... void pause(){ 
+....................    contar(0b11000001);  //u 
+*
+0166:  MOVLW  C1
+0167:  MOVWF  15
+0168:  CALL   008
+....................    contar(0b10001000); //a 
+0169:  MOVLW  88
+016A:  MOVWF  15
+016B:  CALL   008
+....................    contar(0b10001100); //p 
+016C:  MOVLW  8C
+016D:  MOVWF  15
+016E:  CALL   008
+....................    time();    
+016F:  CALL   05B
+....................    contar(0b10000110); //E 
+0170:  MOVLW  86
+0171:  MOVWF  15
+0172:  CALL   008
+....................    contar(0x92); //s 
+0173:  MOVLW  92
+0174:  MOVWF  15
+0175:  CALL   008
+....................    contar(0b10111111);  //- 
+0176:  MOVLW  BF
+0177:  MOVWF  15
+0178:  CALL   008
+....................    time(); 
+0179:  CALL   05B
+.................... } 
+....................  
+.................... void on(){ 
+....................    contar(0b10000110);  //e 
+*
+01CA:  MOVLW  86
+01CB:  MOVWF  15
+01CC:  CALL   008
+....................    contar(0xc6); //c 
+01CD:  MOVLW  C6
+01CE:  MOVWF  15
+01CF:  CALL   008
+....................    contar(0b10001000); //a 
+01D0:  MOVLW  88
+01D1:  MOVWF  15
+01D2:  CALL   008
+....................    time(); 
+01D3:  CALL   05B
+....................    contar(0xc0);  //o 
+01D4:  MOVLW  C0
+01D5:  MOVWF  15
+01D6:  CALL   008
+....................    contar(0x92); //s 
+01D7:  MOVLW  92
+01D8:  MOVWF  15
+01D9:  CALL   008
+....................    contar(0b10111111); //- 
+01DA:  MOVLW  BF
+01DB:  MOVWF  15
+01DC:  CALL   008
+....................    time(); 
+01DD:  CALL   05B
+.................... } 
+....................  
+.................... void of(){ 
+....................    contar(0b10001110);  //f 
+*
+01E1:  MOVLW  8E
+01E2:  MOVWF  15
+01E3:  CALL   008
+....................    contar(0b10001110); //f 
+01E4:  MOVLW  8E
+01E5:  MOVWF  15
+01E6:  CALL   008
+....................    contar(0xc0); //o  
+01E7:  MOVLW  C0
+01E8:  MOVWF  15
+01E9:  CALL   008
+.................... } 
+....................  
+.................... void main() 
+.................... { 
+*
+00E7:  CLRF   04
+....................     
+....................    unsigned int8 cont,giro,seg,min; 
+....................    unsigned long tempo; 
+....................  
+....................    set_tris_b(0b00001100);  
+00E8:  MOVLW  0C
+00E9:  TRIS   6
+....................    output_b(0b00000000);    
+00EA:  CLRF   06
+....................    ola(); 
+....................    cont=min=seg=0; 
+*
+0112:  CLRF   0F
+0113:  MOVF   0F,W
+0114:  MOVWF  10
+0115:  MOVWF  0D
+....................     
+.................... while(true) 
+.................... { 
+....................    if (input(PIN_B3)) { 
+0116:  BTFSS  06.3
+0117:  GOTO   138
+....................       seg++; 
+0118:  INCF   0F,F
+....................       if(seg>=6) { 
+0119:  MOVLW  05
+011A:  MOVWF  07
+011B:  MOVF   0F,W
+011C:  SUBWF  07,W
+011D:  BTFSC  03.0
+011E:  GOTO   126
+....................          seg=0;  
+011F:  CLRF   0F
+....................          if(min<9)min++; 
+0120:  MOVLW  08
+0121:  MOVWF  07
+0122:  MOVF   10,W
+0123:  SUBWF  07,W
+0124:  BTFSC  03.0
+0125:  INCF   10,F
+....................       } 
+....................       time(); 
+0126:  CALL   05B
+....................       cont=min*10+seg; 
+0127:  MOVF   10,W
+0128:  MOVWF  15
+0129:  MOVLW  0A
+012A:  MOVWF  16
+012B:  CALL   073
+012C:  MOVF   0F,W
+012D:  ADDWF  08,W
+012E:  MOVWF  0D
+....................       contar(0xc0); 
+012F:  MOVLW  C0
+0130:  MOVWF  15
+0131:  CALL   008
+....................       contar(seg); 
+0132:  MOVF   0F,W
+0133:  MOVWF  15
+0134:  CALL   008
+....................       contar(min);       
+0135:  MOVF   10,W
+0136:  MOVWF  15
+0137:  CALL   008
+....................    }    
+....................    if (input(PIN_B2)){ 
+0138:  BTFSS  06.2
+0139:  GOTO   1EE
+....................       if(cont>0){ 
+013A:  MOVF   0D,F
+013B:  BTFSC  03.2
+013C:  GOTO   1C3
+....................          tempo=min; 
+013D:  CLRF   12
+013E:  MOVF   10,W
+013F:  MOVWF  11
+....................          tempo= (tempo*60)+(seg*10); 
+0140:  MOVF   12,W
+0141:  MOVWF  14
+0142:  MOVF   11,W
+0143:  MOVWF  13
+0144:  CLRF   16
+0145:  MOVLW  3C
+0146:  MOVWF  15
+0147:  GOTO   005
+0148:  MOVF   09,W
+0149:  MOVWF  14
+014A:  MOVF   08,W
+014B:  MOVWF  13
+014C:  MOVF   0F,W
+014D:  MOVWF  15
+014E:  MOVLW  0A
+014F:  MOVWF  16
+0150:  CALL   073
+0151:  MOVF   08,W
+0152:  ADDWF  13,W
+0153:  MOVWF  11
+0154:  MOVF   14,W
+0155:  MOVWF  12
+0156:  BTFSC  03.0
+0157:  INCF   12,F
+....................          while(tempo>0){  
+0158:  MOVF   11,F
+0159:  BTFSS  03.2
+015A:  GOTO   15E
+015B:  MOVF   12,F
+015C:  BTFSC  03.2
+015D:  GOTO   1C2
+....................             output_high(pin_b5); 
+015E:  BSF    06.5
+....................             time(); 
+015F:  CALL   05B
+....................             //======================= 
+....................             if(input(PIN_B2)){ 
+0160:  BTFSS  06.2
+0161:  GOTO   17B
+....................                output_low(pin_b5); 
+0162:  BCF    06.5
+....................                time(); 
+0163:  CALL   05B
+....................                while(!input(PIN_B2)){   
+0164:  BTFSC  06.2
+0165:  GOTO   17B
+....................                   pause(); 
+....................                  // time(); 
+....................                }           
+*
+017A:  GOTO   164
+....................              } 
+....................              //=======================            
+....................             time(); 
+017B:  CALL   05B
+....................             tempo--;              
+017C:  MOVF   11,W
+017D:  BTFSC  03.2
+017E:  DECF   12,F
+017F:  DECF   11,F
+....................             giro=(tempo%60); 
+0180:  MOVF   12,W
+0181:  MOVWF  16
+0182:  MOVF   11,W
+0183:  MOVWF  15
+0184:  CLRF   18
+0185:  MOVLW  3C
+0186:  MOVWF  17
+0187:  CALL   0AD
+0188:  MOVF   07,W
+0189:  MOVWF  0E
+....................             min=(tempo-giro)/60;             
+018A:  MOVF   11,W
+018B:  MOVWF  13
+018C:  MOVF   0E,W
+018D:  SUBWF  13,F
+018E:  MOVF   12,W
+018F:  MOVWF  14
+0190:  MOVLW  00
+0191:  BTFSS  03.0
+0192:  MOVLW  01
+0193:  SUBWF  14,F
+0194:  MOVF   14,W
+0195:  MOVWF  16
+0196:  MOVF   13,W
+0197:  MOVWF  15
+0198:  CLRF   18
+0199:  MOVLW  3C
+019A:  MOVWF  17
+019B:  CALL   0AD
+019C:  MOVF   08,W
+019D:  MOVWF  10
+....................             seg=(giro-(giro%10))/10; 
+019E:  MOVF   0E,W
+019F:  MOVWF  15
+01A0:  MOVLW  0A
+01A1:  MOVWF  16
+01A2:  CALL   0D2
+01A3:  MOVF   07,W
+01A4:  SUBWF  0E,W
+01A5:  MOVWF  14
+01A6:  MOVWF  15
+01A7:  MOVLW  0A
+01A8:  MOVWF  16
+01A9:  CALL   0D2
+01AA:  MOVF   08,W
+01AB:  MOVWF  0F
+....................             contar(tempo%10); 
+01AC:  MOVF   12,W
+01AD:  MOVWF  16
+01AE:  MOVF   11,W
+01AF:  MOVWF  15
+01B0:  CLRF   18
+01B1:  MOVLW  0A
+01B2:  MOVWF  17
+01B3:  CALL   0AD
+01B4:  MOVF   07,W
+01B5:  MOVWF  13
+01B6:  MOVF   0A,W
+01B7:  MOVWF  14
+01B8:  MOVF   07,W
+01B9:  MOVWF  15
+01BA:  CALL   008
+....................             contar(seg); 
+01BB:  MOVF   0F,W
+01BC:  MOVWF  15
+01BD:  CALL   008
+....................             contar(min);              
+01BE:  MOVF   10,W
+01BF:  MOVWF  15
+01C0:  CALL   008
+....................           }         
+01C1:  GOTO   158
+....................       }else{         
+01C2:  GOTO   1E0
+....................             time(); 
+01C3:  CALL   05B
+....................             if (input(pin_b2)){ 
+01C4:  BTFSS  06.2
+01C5:  GOTO   1DF
+....................                 output_high(pin_b5); 
+01C6:  BSF    06.5
+....................                  time();  
+01C7:  CALL   05B
+....................                 while(!input(pin_b2)){ 
+01C8:  BTFSC  06.2
+01C9:  GOTO   1DF
+....................                  on();              
+....................                 } 
+*
+01DE:  GOTO   1C8
+....................              } 
+....................          time(); 
+01DF:  CALL   05B
+....................       } 
+....................       output_low(pin_b5);  
+01E0:  BCF    06.5
+....................       of(); 
+....................       seg=min=cont=0;           
+*
+01EA:  CLRF   0D
+01EB:  MOVF   0D,W
+01EC:  MOVWF  10
+01ED:  MOVWF  0F
+....................    }   
+.................... } 
+01EE:  GOTO   116
+.................... } 
+....................  
+01EF:  SLEEP
+
+Configuration Fuses:
+   Word  1: 0FEA   INTRC NOWDT NOPROTECT NOMCLR

@@ -1,0 +1,73 @@
+007     @SCRATCH
+008     @SCRATCH
+008     _RETURN_
+009     @SCRATCH
+00A     @SCRATCH
+00B     @SCRATCH
+00D     MAIN.cont
+00E     MAIN.giro
+00F     MAIN.seg
+010     MAIN.min
+011-012 MAIN.tempo
+013-014 @MUL1616.P1
+013     time.@SCRATCH1
+013     MAIN.@SCRATCH1
+014     @delay_ms1.P1
+014     MAIN.@SCRATCH2
+015-016 @DIV1616.P1
+015     @MUL88.P2
+015-016 @MUL1616.P3
+015     contar.numero
+015     @DIV88.P1
+016     contar.databits
+016     @DIV88.P1
+016     @MUL88.P2
+017-018 @DIV1616.P1
+017     @MUL1616.@SCRATCH1
+017     @DIV88.@SCRATCH1
+019     @DIV1616.@SCRATCH1
+
+ROM Allocation:
+005F  @delay_ms1
+0053  pulso_clock
+0008  contar
+005B  time
+00EB  ola
+0166  pause
+01CA  on
+01E1  of
+00E7  MAIN
+0073  @MUL88
+0098  @MUL1616
+00AD  @DIV1616
+00D2  @DIV88
+00E7  @cinit
+
+Project Directory:
+    C:\Users\r5527821.TESBLAN\Dropbox\pic\projpic\time_uv\
+
+Project Files:
+    timer_uv.c
+    timer_uv.h
+    ..\..\..\..\..\..\Program Files\PICC\Devices\12C508A.h
+
+Units:
+    timer_uv.c (main)
+
+Compiler Settings:
+    Processor:      PIC12C508A
+    Pointer Size:   5
+    Opt Level:      0
+    Short,Int,Long: UNSIGNED: 1,8,16
+    Float,Double:   32,32
+
+Output Files:
+    Errors:      pic-c-12C508A\timer_uv.err
+    Ext Symbols: timer_uv.esym
+    INHX8:       timer_uv.hex
+    Symbols:     timer_uv.sym
+    List:        timer_uv.lst
+    Debug/COFF:  timer_uv.cof
+    Project:     timer_uv.PJT
+    Call Tree:   timer_uv.tre
+    Statistics:  timer_uv.sta
